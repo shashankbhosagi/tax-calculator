@@ -94,6 +94,11 @@ body {
     height: 300px;
 }
 
+#grossIncomeToolTip,
+#extraIncomeToolTip,
+#totalDeductionsToolTip {
+    display: none;
+}
 
 
 /* Media query for mobile */

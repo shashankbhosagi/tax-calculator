@@ -23,12 +23,14 @@
                     data-bs-title="Gross total income is your total income in your financial year "></i>
             </div>
             <div class="text-input">
-                <i class="fa-solid fa-circle-exclamation" data-bs-toggle="tooltip" data-bs-placement="right"
-                    data-bs-custom-class="custom-tooltip" data-bs-title="please enter numbers only"></i>
-                <input placeholder="Enter gross annual income">
+                <i id="grossIncomeToolTip" class="fa-solid fa-circle-exclamation" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-custom-class="custom-tooltip"
+                    data-bs-title="please enter numbers only"></i>
+                <input id="grossIncome" placeholder="Enter gross annual income" onkeyup="checkInput('grossIncome')">
             </div>
 
         </div>
+
         <div class="input-container">
             <div>
                 Enter extra income
@@ -37,9 +39,11 @@
                     data-bs-title="Extra income is something that is not present in gross total income"></i>
             </div>
             <div class="text-input">
-                <i class="fa-solid fa-circle-exclamation" data-bs-toggle="tooltip" data-bs-placement="right"
-                    data-bs-custom-class="custom-tooltip" data-bs-title="please enter numbers only"></i>
-                <input placeholder="Enter extra income from other sources">
+                <i id="extraIncomeToolTip" class="fa-solid fa-circle-exclamation" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-custom-class="custom-tooltip"
+                    data-bs-title="please enter numbers only"></i>
+                <input id="extraIncome" placeholder="Enter extra income from other sources"
+                    onkeyup="checkInput('extraIncome')">
             </div>
 
         </div>
@@ -61,12 +65,14 @@
             <div>
                 Enter total applicable deductions
                 <i class="fas fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-custom-class="custom-tooltip" data-bs-title="Deduction from yout income allowances"></i>
+                    data-bs-custom-class="custom-tooltip" data-bs-title="Deduction from your income allowances"></i>
             </div>
             <div class="text-input">
-                <i class="fa-solid fa-circle-exclamation" data-bs-toggle="tooltip" data-bs-placement="right"
-                    data-bs-custom-class="custom-tooltip" data-bs-title="please enter numbers only"></i>
-                <input placeholder="Enter extra income from other sources">
+                <i id="totalDeductionsToolTip" class="fa-solid fa-circle-exclamation" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-custom-class="custom-tooltip"
+                    data-bs-title="please enter numbers only"></i>
+                <input id="totalDeductions" placeholder="Add total applicable deductions"
+                    onkeyup="checkInput('totalDeductions')">
             </div>
 
         </div>
