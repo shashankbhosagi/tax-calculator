@@ -55,7 +55,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -83,6 +83,15 @@ body {
 .button-container button {
     width: 95%;
     background-color: #6559F5;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
 }
 
 
