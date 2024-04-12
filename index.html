@@ -53,8 +53,8 @@
                 <i class="fas fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="top"
                     data-bs-custom-class="custom-tooltip" data-bs-title="What group does your age fall into"></i>
             </div>
-            <select class="form-select">
-                <option selected> </option>
+            <select class="form-select" id="age-select">
+                <option value="0" selected> </option>
                 <option value="1">&lt;40</option>
                 <option value="2">≥40 &amp; &lt;60</option>
                 <option value="3">≥60</option>
@@ -79,16 +79,16 @@
         <div class="button-container">
 
 
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">Submit</button>
+            <button type="button" onclick="calculateOverallIncome()" class="btn btn-primary">Submit</button>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="overallIncomeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <h3>Your Overall Income will be</h3>
-                    <h5>12,00,00</h5>
+                    <h5 id="overallIncome"></h5>
                     <h6>After Tax deductions</h6>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
@@ -108,7 +108,8 @@
 
 
 
-
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
         crossorigin="anonymous"></script>
