@@ -1,9 +1,8 @@
-const tooltipTriggerList = document.querySelectorAll(
-  '[data-bs-toggle="tooltip"]'
-);
-const tooltipList = [...tooltipTriggerList].map(
-  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-);
+document
+  .getElementById("overallIncomeModal")
+  .addEventListener("hidden.bs.modal", () => {
+    window.location.reload();
+  });
 
 function checkInput(inputID) {
   let input = document.getElementById(inputID);
@@ -18,14 +17,29 @@ function checkInput(inputID) {
 }
 
 function calculateOverallIncome() {
-  const grossIncome = Number(document.getElementById("grossIncome").value);
-  const extraIncome = Number(document.getElementById("extraIncome").value);
-  const age = Number(document.getElementById("age-select").value);
-  const totalDeductions = Number(
-    document.getElementById("totalDeductions").value
-  );
+  let grossIncome = document.getElementById("grossIncome").value;
+  let extraIncome = document.getElementById("extraIncome").value;
+  let age = Number(document.getElementById("age-select").value);
+  let totalDeductions = document.getElementById("totalDeductions").value;
+
+  if (
+    isSpaces(grossIncome) ||
+    isSpaces(extraIncome) ||
+    isSpaces(totalDeductions)
+  ) {
+    alert("Please enter numbers that are non-negative and not empty.");
+    return;
+  }
+  grossIncome = Number(grossIncome);
+  extraIncome = Number(extraIncome);
+  totalDeductions = Number(totalDeductions);
+
   if (isNaN(grossIncome) || isNaN(extraIncome) || isNaN(totalDeductions)) {
-    alert("Please input only numeric values and ensure they are non-negative.");
+    alert("Please enter numbers that are non-negative and not empty.");
+    return;
+  }
+  if (grossIncome < 0 || extraIncome < 0 || totalDeductions < 0) {
+    alert("Please enter numbers that are non-negative and not empty.");
     return;
   }
 
@@ -44,11 +58,18 @@ function calculateOverallIncome() {
   let overallIncome = netIncome - tax;
   overallIncome = Number(overallIncome.toFixed(2));
 
-  document.getElementById("overallIncome").textContent =
-    overallIncome.toLocaleString("en-IN", {
+  const threshold = 1000000000000000000000000;
+  let overallIncomeDisplay;
+  if (overallIncome > threshold) {
+    overallIncomeDisplay = overallIncome.toExponential();
+  } else {
+    overallIncomeDisplay = overallIncome.toLocaleString("en-IN", {
       style: "currency",
       currency: "INR",
     });
+  }
+
+  document.getElementById("overallIncome").textContent = overallIncomeDisplay;
 
   let myModal = new bootstrap.Modal(
     document.getElementById("overallIncomeModal")
@@ -56,26 +77,25 @@ function calculateOverallIncome() {
   myModal.show();
 }
 
-function calculateTax(taxableIncome, age) {
+function calculateTax(netIncome, age) {
   switch (age) {
     case 1:
-      //age is less than 40 so tax 30%
-      return 0.3 * (taxableIncome - 800000);
+      return 0.3 * (netIncome - 800000);
     case 2:
-      //age is age ≥ 40 but < 60 so tax 40%
-      return 0.4 * (taxableIncome - 800000);
+      return 0.4 * (netIncome - 800000);
 
     case 3:
-      //age is greater than 60 so tax 10%
-      return 0.1 * (taxableIncome - 800000);
-
-    default:
-      //no age selected show error
-      return -1;
+      return 0.1 * (netIncome - 800000);
   }
 }
 
-// 1) 8 lakh ke upar hai kya dekho Gross Annual Income + Extra Income - Deductions
-// 2) 8 lakh ke kitna upar hai => () - 8
-// 3) () - 8 * %tax = tax
-// Overall income = Gross_Annual_Income + Extra_Income-deductions - tax
+function isSpaces(str) {
+  return str.match(/^ *$/) !== null;
+}
+
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
