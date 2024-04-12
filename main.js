@@ -24,22 +24,36 @@ function calculateOverallIncome() {
   const totalDeductions = Number(
     document.getElementById("totalDeductions").value
   );
+  if (isNaN(grossIncome) || isNaN(extraIncome) || isNaN(totalDeductions)) {
+    alert("Please input only numeric values and ensure they are non-negative.");
+    return;
+  }
 
   if (age === 0) {
     alert("Age must be selected");
     return;
-  } else {
-    let netIncome = grossIncome + extraIncome - totalDeductions;
-    let tax = netIncome > 800000 ? calculateTax(netIncome, age) : 0;
-
-    let overallIncome = netIncome - tax;
-
-    document.getElementById("overallIncome").textContent = overallIncome;
-    var myModal = new bootstrap.Modal(
-      document.getElementById("overallIncomeModal")
-    );
-    myModal.show();
   }
+  if (totalDeductions > grossIncome + extraIncome) {
+    alert(
+      "Deductions cannot be more the netIncome (Gross Income + Extra Income)"
+    );
+    return;
+  }
+  let netIncome = grossIncome + extraIncome - totalDeductions;
+  let tax = netIncome > 800000 ? calculateTax(netIncome, age) : 0;
+  let overallIncome = netIncome - tax;
+  overallIncome = Number(overallIncome.toFixed(2));
+
+  document.getElementById("overallIncome").textContent =
+    overallIncome.toLocaleString("en-IN", {
+      style: "currency",
+      currency: "INR",
+    });
+
+  let myModal = new bootstrap.Modal(
+    document.getElementById("overallIncomeModal")
+  );
+  myModal.show();
 }
 
 function calculateTax(taxableIncome, age) {
